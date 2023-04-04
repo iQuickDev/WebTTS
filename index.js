@@ -1,6 +1,4 @@
-
 const fastify = require('fastify')()
-const fs = require('fs')
 const tts = require('say')
 const path = require('path')
 
@@ -13,6 +11,7 @@ fastify.post('/play', async (request, reply) =>
     const text = await request.body.text
     tts.speak(text)
     reply.code(200).send()
+    logEvent(text)
 })
 
 const start = async () =>
@@ -27,3 +26,8 @@ const start = async () =>
     }
 }
 start()
+
+function logEvent(text) {
+    let date = new Date()
+    console.log(`[LOG] [${date.toLocaleDateString('it')} - ${date.toLocaleTimeString('it')}] : ${text}`)
+}
