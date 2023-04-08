@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,11 +8,28 @@
     <link rel="stylesheet" href="style.css">
     <title>TTS Server</title>
 </head>
+
 <body>
-    <h1>Text To Speech Server</h1>
+    <h1>WebTTS v1.0</h1>
     <textarea id="text"></textarea>
     <br>
-    <button id="send">Speak</button>
+    <div class="controls">
+        <select id="lang">
+            <option value="en-US">English (US)</option>
+            <option value="en-GB">English (UK)</option>
+            <option value="it-IT">Italian</option>
+            <option value="es-ES">Spanish</option>
+            <option value="fr-FR">French</option>
+            <option value="de-DE">German</option>
+        </select>
+        <button id="send">Speak</button>
+            <input id="password" name="password" type="password" placeholder="Password">
+    </div>
+    <div class="logs-area">
+        <h1>Logs</h1>
+        <textarea id="logs" readonly></textarea>
+    </div>
     <script src="index.js"></script>
 </body>
+
 </html>
