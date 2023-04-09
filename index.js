@@ -1,9 +1,24 @@
-const fastify = require('fastify')()
+const fs = require('fs')
 const path = require('path')
 const dotenv = require('dotenv')
 const Logger = require('./logger.js')
 const { play } = require('./tts.js')
+const Speaker = require('speaker')
 dotenv.config()
+const fastify = require('fastify')({
+    http2: true,
+    https: {
+        allowHTTP1: true, // fallback support for HTTP1
+        key: fs.readFileSync(path.join(__dirname, "TLS", "fastify.key")),
+        cert: fs.readFileSync(path.join(__dirname, "TLS", "fastify.cert")),
+      },
+})
+
+const speaker = new Speaker({
+    channels: 1,         
+    bitDepth: 16,         
+    sampleRate: 48000     
+});
 
 fastify.register(require('@fastify/static'), {
     root: path.join(__dirname, 'public'),
@@ -18,6 +33,17 @@ fastify.register(async function (fastify) {
         connection.socket.send(log)
     })
   })
+})
+
+fastify.register(async function (fastify) {
+    fastify.get('/voice', { websocket: true }, (connection, req) => {
+        if (req.query.password == process.env.AUTH_PASSWORD)
+        {
+            connection.socket.on('message', data => {
+                speaker.write(data)
+            })
+        } else connection.socket.close(1)
+    })
 })
 
 fastify.post('/play', async (request, reply) =>

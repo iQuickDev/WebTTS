@@ -34,7 +34,7 @@ textarea {
 }
 
 button {
-    width: 15%;
+    width: 35%;
     height: 50px;
     border-radius: 10px;
     background: #333;
@@ -43,6 +43,7 @@ button {
     font-size: 1.5rem;
     margin: 10px;
     transition: .3s transform;
+    vertical-align: middle;
 }
 
 button:hover {
@@ -56,15 +57,16 @@ button:active {
 }
 
 .controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     margin: auto;
     width: 80%;
     position: relative;
 }
 
 #lang {
-    position: absolute;
-    left: 0%;
-    height: 30px;
+    height: 40px;
     font-size: 1.2rem;
     border-radius: 10px;
     background: #333;
@@ -78,9 +80,6 @@ button:active {
 }
 
 #password {
-    position: absolute;
-    top: 0%;
-    right: 0%;
     height: 30px;
     font-size: 1rem;
     border-radius: 10px;
@@ -88,6 +87,15 @@ button:active {
     border: none;
     color: #FFF;
     padding: 5px;
+}
+
+#voice-status {
+    font-size: .8rem;
+    display: block;
+}
+
+.buttons {
+    width: 100%;
 }
 
 @media screen and (max-width: 800px) {
@@ -103,4 +111,14 @@ button:active {
     #password {
         position: initial;
     }
+
+    .controls {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin: auto;
+        width: 80%;
+        position: relative;
+    }
+    
 }
