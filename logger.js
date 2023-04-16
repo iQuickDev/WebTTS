@@ -8,6 +8,7 @@ module.exports = class Logger
         let date = new Date()
         let log = `[LOG] [${date.toLocaleDateString('it')} - ${date.toLocaleTimeString('it')}] (${language}) : ${text}`
         Logger.logs.emit('log', log)
+        console.log(log)
     }
 
 }
