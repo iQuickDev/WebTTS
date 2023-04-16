@@ -9,6 +9,10 @@ npm install
 mkcert -install -cert-file ./TLS/fastify.cert -key-file ./TLS/fastify.key <server ip address>
 node .
 ```
+### Editing the server password
+- rename the `.env.example` file to `.env`
+- modify the `AUTH_PASSWORD` field to your liking
+
 once you've done the setup your server will open on port `50872` and will serve content over the HTTPS protocol.
 
 ## API
