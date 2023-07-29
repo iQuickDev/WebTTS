@@ -13,9 +13,9 @@ dependencies:
   fastify:
     specifier: ^4.15.0
     version: 4.15.0
-  speaker:
-    specifier: ^0.5.4
-    version: 0.5.4
+  speaker-arm64:
+    specifier: ^0.5.2
+    version: 0.5.2
 
 packages:
 
@@ -539,8 +539,8 @@ packages:
       atomic-sleep: 1.0.0
     dev: false
 
-  /speaker@0.5.4:
-    resolution: {integrity: sha512-0I35CJGgqU1rd/a3qVysR5gLlG+8QlzJcPAEnYvT0BLfuLdJ7JNdlQHwbh7ETNcXDXbzm2O148GEAoAER54Dvw==}
+  /speaker-arm64@0.5.2:
+    resolution: {integrity: sha512-+lJPSfmBVilmZNL1B5LAnZMlp0soV65a2Pjk5/w+QGq14Mnz9SFUlpXW1OOzwbDluGo/iu1OeR8tE9nzXHbcLw==}
     engines: {node: '>=8.6'}
     requiresBuild: true
     dependencies:

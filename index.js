@@ -3,7 +3,7 @@ const path = require('path')
 const dotenv = require('dotenv')
 const Logger = require('./logger.js')
 const { play } = require('./tts.js')
-const Speaker = require('speaker')
+const Speaker = require('speaker-arm64')
 dotenv.config()
 const fastify = require('fastify')({
     http2: true,
