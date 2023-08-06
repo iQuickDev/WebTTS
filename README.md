@@ -52,3 +52,6 @@ to trigger a Voice action a `WebSocket` needs to be opened like this
 wss://<address>:50872/voice?password=yourpasswordhere
 ```
 The audio data needs to be encoded in a `16 bit binary array` on `1` channel, a bit depth of `16` and a sample rate of `48000 Hz`
+
+## Preview
+![The Interface](https://i.ibb.co/yYqWGHC/Copy-Q-m-Yaau-E.png)
