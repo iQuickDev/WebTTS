@@ -37,7 +37,7 @@ fastify.register(async function (fastify) {
 
 fastify.register(async function (fastify) {
     fastify.get('/voice', { websocket: true }, (connection, req) => {
-        if (req.query.password == process.env.AUTH_PASSWORD)
+        if (authorize(req.query.password) || isPrivateIP(req.ip))
         {
             connection.socket.on('message', data => {
                 speaker.write(data)
@@ -51,7 +51,7 @@ fastify.post('/play', async (request, reply) =>
     const { text, language, password } = await request.body
     if (text)
     {
-        if (authorize(password)) {
+        if (authorize(password) || isPrivateIP(request.ip)) {
             play(text, language ?? 'en-US')
             Logger.logEvent(text, language)
             reply.code(200).send({result: 'text played correctly'})
@@ -60,15 +60,26 @@ fastify.post('/play', async (request, reply) =>
     } else reply.send({result: 'no text was provided'}).code(400)
 })
 
-fastify.listen({ host: '0.0.0.0', port: 50872 }, (err) =>
+fastify.listen({ host: '0.0.0.0', port: process.env.SERVER_PORT ?? 50872 }, (err) =>
 {
     if (err)
     {
         console.error(err)
         process.exit(1)
     }
+    console.log(`WebTTS is ready on port ${process.env.SERVER_PORT ?? 50872}`)
 })
 
 function authorize(password) {
     return password == process.env.AUTH_PASSWORD
 }
+
+function isPrivateIP(ip) {
+    if (process.env.BYPASS_AUTH_LOCAL != "true")
+        return false
+    const parts = ip.split('.')
+    return parts[0] === '10' || 
+       (parts[0] === '172' && (parseInt(parts[1], 10) >= 16 && parseInt(parts[1], 10) <= 31)) || 
+       (parts[0] === '192' && parts[1] === '168') ||
+       (parts[0] === '127')
+ }
